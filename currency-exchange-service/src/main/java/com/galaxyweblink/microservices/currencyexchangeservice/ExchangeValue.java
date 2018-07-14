@@ -2,11 +2,17 @@ package com.galaxyweblink.microservices.currencyexchangeservice;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+@Entity
 public class ExchangeValue {
-
+@Id
  private Long id;	
+@Column(name="currency_from")
  private String from;
- private String to;
+@Column(name="currency_to")
+private String to;
  private BigDecimal conversionMultiple;
  private int port;
  ExchangeValue(){
