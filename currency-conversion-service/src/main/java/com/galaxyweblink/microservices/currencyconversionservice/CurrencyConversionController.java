@@ -27,8 +27,8 @@ public CurrencyConversionBean convertCurrency(@PathVariable String from, @PathVa
 			"http://localhost:8000/currency-exchange/from/{from}/to/{to}",CurrencyConversionBean.class,uriVariables);
 	
 	CurrencyConversionBean response=responseEntity.getBody();
-	return new CurrencyConversionBean(response.getId(),from,to,response.getConversionMultiple(),
-			quantity,quantity,response.getPort());
+	return new CurrencyConversionBean(response.getId(), from, to, response.getConversionMultiple(), quantity,
+			quantity.multiply(response.getConversionMultiple()), response.getPort());
 }
 
 @GetMapping("/currency-converter-feign/from/{from}/to/{to}/quantity/{quantity}")
@@ -36,7 +36,7 @@ public CurrencyConversionBean convertCurrencyFeign(@PathVariable String from, @P
 	
 	
 	CurrencyConversionBean response=proxy.retrieveExchangeVale(from, to);
-	return new CurrencyConversionBean(response.getId(),from,to,response.getConversionMultiple(),
-			quantity,quantity,response.getPort());
+	return new CurrencyConversionBean(response.getId(), from, to, response.getConversionMultiple(), quantity,
+			quantity.multiply(response.getConversionMultiple()), response.getPort());
 }
 }
